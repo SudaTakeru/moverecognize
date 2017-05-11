@@ -12,10 +12,12 @@ end
 
 matchedPoints=zeros(n2,2,2*N);
 featurevector=zeros(n2,2,N-1);
+%{
 matchedPointsM=zeros(n2,1,N-1);
 matchedPointsO=zeros(n2,1,N-1);
 matchedPointsM2=zeros(n,1,N-1);
 matchedPointsO2=zeros(n,1,N-1);
+%}
 fvec=zeros(n,2,N-1);
 
 for j=1:N-1
@@ -69,12 +71,12 @@ for j=1:N-1
     %hold off;
 end
 
-
+%{
 figure;hold on;
 for j=1:N-1
     quiver(matchedPoints(number(1,:),1,2*j-1),matchedPoints(number(1,:),2,2*j-1),fvec(:,1,j),fvec(:,2,j));
 end
-
+%}
 %ïWñ{ê∂ê¨
 sampledata=zeros(n,4,N-1);
 for j=1:N-1

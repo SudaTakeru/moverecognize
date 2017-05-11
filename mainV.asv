@@ -115,7 +115,7 @@ ClusteringSize=2;
 
 
 %%%%%%%%%%%%Input Data Processing%%%%%%%%%
-data4=zscore(data); %Standardization
+data4=zscore(X3); %Standardizationdata(:,:,:,:);
 [d,dd,ddd,N] = size(data4); %input data file
 
 for i=1:N
@@ -128,7 +128,7 @@ for i=1:N
 end
 
 [d,N]= size(X3); %input data file
-trainingData=X3;
+trainingData=
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 NN = Soinn('lambda', lambda, 'ageMax', age, 'dim', d);

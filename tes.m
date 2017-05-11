@@ -17,7 +17,7 @@ for iv=1:size(data,4)
         end   
     end
 end
-%{
+
 for j=1:N
     figure;hold on;
     for ti=1:size(data,3)
