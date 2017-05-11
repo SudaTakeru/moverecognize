@@ -15,6 +15,9 @@ movies = dir('B7.MOV');
 high=400;
 low=1;
 
+No=3;
+MT=20;
+Ns=6;
 %%%% frame processing %%%%
 i=1;
   v = VideoReader(movies(i).name); 
@@ -26,7 +29,7 @@ i=1;
 N = k;
 mydata = cell(1, N);
 
-for i = 1:N 
+for i = 1:3 
   mydata{i} = rgb2gray(sample(i).cdata); 
 end
 
@@ -42,12 +45,15 @@ matchedPointsO2=zeros(n,1,N-1);
 %}
 fvec=zeros(n,2,N-1);
 figure;hold on;
-for j=1:N-1
-    [matchedPoints1,matchedPoints2]=surf(mydata{j},mydata{j+1});
-    %Features Match
+for j=1:2
     
+    %%%%%%%%%%%%%%
+    [matchedPoints1,matchedPoints2]=surf2(mydata{j},mydata{j+1},No,MT,Ns);
+    %Features Match
     showMatchedFeatures(mydata{j},mydata{j+1},matchedPoints1,matchedPoints2);
-    %hold on;
+    %%%%%%%%%%%%%%
+    
+    
     matchedPoints1=matchedPoints1.selectStrongest(n2);
     matchedPoints2=matchedPoints2.selectStrongest(n2);
     if size(matchedPoints1.Location,1)<n2
@@ -90,7 +96,7 @@ for j=1:N-1
 
     %Show Vector
     quiver(matchedPoints(number(1,:),1,2*j-1),matchedPoints(number(1,:),2,2*j-1),fvec(:,1,j),fvec(:,2,j));
-    hold off;
+
 end
 
 
