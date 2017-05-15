@@ -80,7 +80,7 @@ for j=1:N-1
         end
     end
     
-    % vector sort
+    % vector sort and adjust dimension
     data=fvec2(:,:,j);
     vs=zeros(size(data,1),1);
     for kv=1:size(data,1)
@@ -89,20 +89,17 @@ for j=1:N-1
     vs2=sort(vs(:,1));
     for kv=1:size(data,1)
         for kv2=1:size(data,1)
-            if vs(kv,1)==vs2(kv2,1)
-                fvec3(kv2,:,j)=data(kv,:,j);
+            if vs(kv2,1)==vs2(kv,1)
+                fvec3(kv,:,j)=data(kv2,:,j);
+                number(1,kv)=kv2;
             end
         end
-    end   
+    end
+    number3=number2(1,number(1,:));
     
-    
-    %Dicimation for adjust dimension
-    ind=randi([1,count-1],n,1);
-    number=number2(ind(:,1));
-    
-    matchedPoints(:,:,2*j-1)=matchedPoints1.Location(number(1,:),:);
-    matchedPoints(:,:,2*j)=matchedPoints2.Location(number(1,:),:);
-    fvec(:,:,j)=featurevector2(number(1,:),:);
+    matchedPoints(:,:,2*j-1)=matchedPoints1.Location(number3(1,1:n),:);
+    matchedPoints(:,:,2*j)=matchedPoints2.Location(number3(1,1:n),:);
+    fvec(:,:,j)=fvec3(1:n,:,j);
     
     %Show Vector
     quiver(matchedPoints(:,1,2*j-1),matchedPoints(:,2,2*j-1),fvec(:,1,j),fvec(:,2,j));
