@@ -8,10 +8,6 @@ n2=150; % number of finding points
 %%%% filter wides %%%%
 high=400;
 low=1;
-%%%% SURF parameter%%%%
-No=3;
-MT=20;
-Ns=6;
 %%%% inputfiles %%%%
 cd x;
 movies = dir('*.MOV'); 
@@ -31,7 +27,7 @@ for i = 1:N
   [sample,k(1,i+1)]=InportV(v); 
   %Featurepointmatching
   %sampledata{i}=Featurepointmtching(sample,k(1,i+1),n);
-  sampledata{i}=Featurepointmtching2(sample,k(1,i+1),n,n2,high,low,No,MT,Ns);
+  sampledata{i}=Featurepointmtching2(sample,k(1,i+1),n,n2,high,low);
   if k(1,i+1)<k(1,i)
       t=i;
   end

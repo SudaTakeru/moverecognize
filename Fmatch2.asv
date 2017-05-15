@@ -15,9 +15,6 @@ movies = dir('B7.MOV');
 high=400;
 low=1;
 
-No=3;
-MT=20;
-Ns=6;
 %%%% frame processing %%%%
 i=1;
   v = VideoReader(movies(i).name); 
@@ -37,23 +34,14 @@ end
 
 matchedPoints=zeros(n2,2,2*N);
 featurevector=zeros(n2,2,N-1);
-%{
-matchedPointsM=zeros(n2,1,N-1);
-matchedPointsO=zeros(n2,1,N-1);
-matchedPointsM2=zeros(n,1,N-1);
-matchedPointsO2=zeros(n,1,N-1);
-%}
+
 fvec=zeros(n,2,N-1);
 figure;hold on;
 for j=1:2
-    
-    %%%%%%%%%%%%%%
-    [matchedPoints1,matchedPoints2]=surf2(mydata{j},mydata{j+1},No,MT,Ns);
+    [matchedPoints1,matchedPoints2]=surf(mydata{j},mydata{j+1});
     %Features Match
+    
     showMatchedFeatures(mydata{j},mydata{j+1},matchedPoints1,matchedPoints2);
-    %%%%%%%%%%%%%%
-    
-    
     matchedPoints1=matchedPoints1.selectStrongest(n2);
     matchedPoints2=matchedPoints2.selectStrongest(n2);
     if size(matchedPoints1.Location,1)<n2
@@ -91,33 +79,9 @@ for j=1:2
         end
     end
     
-<<<<<<< HEAD
-    % vector sort and adjust dimension
-    data=fvec2(:,:,j);
-    vs=zeros(size(data,1),1);
-    for kv=1:size(data,1)
-        vs(kv,1)=norm(data(kv,1:2,j));
-    end
-    vs2=sort(vs(:,1));
-    for kv=1:size(data,1)
-        for kv2=1:size(data,1)
-            if vs(kv2,1)==vs2(kv,1)
-                fvec3(kv,:,j)=data(kv2,:,j);
-                number(1,kv)=kv2;
-            end
-        end
-    end
-    number3=number2(1,number(1,:));
-    
-    matchedPoints(:,:,2*j-1)=matchedPoints1.Location(number3(1,1:n),:);
-    matchedPoints(:,:,2*j)=matchedPoints2.Location(number3(1,1:n),:);
-    fvec(:,:,j)=fvec3(1:n,:,j);
-    
-=======
     %matchedPointsM2(:,:,j)=matchedPointsM(number(1,:),:,j);
     %matchedPointsO2(:,:,j)=matchedPointsO(number(1,:),:,j);
 
->>>>>>> parent of 979f493... 特徴点の取り方改善
     %Show Vector
     quiver(matchedPoints(number(1,:),1,2*j-1),matchedPoints(number(1,:),2,2*j-1),fvec(:,1,j),fvec(:,2,j));
 
